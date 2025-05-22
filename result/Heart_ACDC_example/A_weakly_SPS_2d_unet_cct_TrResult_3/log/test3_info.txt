@@ -1,0 +1,7 @@
+[08:32:30.884] Namespace(data_root_path='../../data/ACDC2017/ACDC_for2D', data_type='Heart', data_name='ACDC_example', testData='trainvol.txt', savedir='TrResult', model='unet_cct', exp='A_weakly_SPS_2d', fold='stage1', num_classes=4, tt_num=3, threshold=0.1, uncertainty_show_path='../../figure/MedIA_ACDC/uncertainty_thre01_250303trashs/', seed=2022)
+[08:32:30.897] test volume num:140
+[08:32:32.938] init weight from ../../model/Heart_ACDC_example/A_weakly_SPS_2d_unet_cct_stage1/unet_cct_best_model.pth
+[08:32:32.948] the testing case: patient001_frame01
+[08:32:40.189] the testing case: patient001_frame12
+[08:32:47.295] the testing case: patient002_frame01
+[08:32:53.701] the testing case: patient002_frame12

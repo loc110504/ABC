@@ -1,0 +1,44 @@
+[06:44:54.802] Namespace(data_root_path='../../data/ACDC2017/ACDC_for2D', data_type='Heart', data_name='ACDC', testData='test.txt', savedir='TsResult', model='unet_cct', exp='A_weakly_SPS_2d', fold='stage1', num_classes=4, patch_size=[256, 256], tt_num=1)
+[06:44:54.805] test volume num:30
+[06:44:57.025] init weight from ../../model/Heart_ACDC/A_weakly_SPS_2d_unet_cct_stage1/unet_cct_best_model.pth
+[06:44:57.028] the testing case: patient004_frame15
+[06:45:00.027] the testing case: patient012_frame13
+[06:45:00.845] the testing case: patient013_frame14
+[06:45:01.765] the testing case: patient014_frame01
+[06:45:02.736] the testing case: patient015_frame01
+[06:45:03.750] the testing case: patient020_frame11
+[06:45:04.445] the testing case: patient025_frame09
+[06:45:05.417] the testing case: patient030_frame01
+[06:45:06.407] the testing case: patient034_frame16
+[06:45:07.287] the testing case: patient036_frame01
+[06:45:08.025] the testing case: patient038_frame11
+[06:45:09.203] the testing case: patient040_frame13
+[06:45:10.193] the testing case: patient045_frame13
+[06:45:10.894] the testing case: patient053_frame01
+[06:45:11.596] the testing case: patient058_frame01
+[06:45:12.439] the testing case: patient064_frame12
+[06:45:13.637] the testing case: patient066_frame11
+[06:45:14.670] the testing case: patient072_frame11
+[06:45:15.447] the testing case: patient074_frame01
+[06:45:16.360] the testing case: patient075_frame06
+[06:45:17.311] the testing case: patient076_frame01
+[06:45:18.239] the testing case: patient081_frame01
+[06:45:19.299] the testing case: patient085_frame09
+[06:45:20.602] the testing case: patient086_frame01
+[06:45:21.293] the testing case: patient089_frame01
+[06:45:22.045] the testing case: patient089_frame10
+[06:45:22.829] the testing case: patient093_frame01
+[06:45:23.650] the testing case: patient094_frame01
+[06:45:24.370] the testing case: patient096_frame01
+[06:45:24.158] the testing case: patient098_frame01
+[06:45:24.890] avg metric of each organ[dsc,asd,hd95]:[[0.87356381 1.08183965 5.77714858]
+ [0.85318858 1.16480135 3.41184565]
+ [0.92618339 1.08309684 4.63616703]]
+[06:45:24.891] mean metric of all[dice,asd,hd95]:[0.88431192 1.10991261 4.60838709]
+[06:45:24.891] std of each organ[dice,asd,hd95]:[[0.07691464 0.89188934 4.30809645]
+ [0.05696413 0.76774544 2.27924074]
+ [0.06456026 1.68033479 7.27390381]]
+[06:45:24.892] std of all[dsc,asd,hd95]:[0.06614634 1.11332319 4.62041367]
+
+
+[06:45:24.892] time cost: 30.17713952064514s, i.e.0.5029523253440857min
