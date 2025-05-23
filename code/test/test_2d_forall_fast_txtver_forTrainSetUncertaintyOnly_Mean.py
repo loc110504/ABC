@@ -30,7 +30,7 @@ parser.add_argument('--data_root_path', type=str,
 parser.add_argument('--data_type', type=str,
                     default='Heart', help='Data category')
 parser.add_argument('--data_name', type=str,
-                    default='ACDC_example', help='Data name')
+                    default='ACDC', help='Data name')
 parser.add_argument('--testData', type=str,
                     default='trainvol.txt', help='Data text: trainvol.txt for retrain, test.txt, valid.txt')
 parser.add_argument('--savedir', type=str,
