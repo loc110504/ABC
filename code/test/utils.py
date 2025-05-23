@@ -29,7 +29,7 @@ def logInference(metric_onTest_all_list):
     std_1= np.mean(std,axis=0)
     logging.info("std of all[dsc,asd,hd95]:{}\n\n".format(std_1))
 
-def get_the_first_k_largest_components(image, k = 1): #image is binary map
+def get_the_first_k_largest_components_bug(image, k = 1): #image is binary map
     """
     get the largest component from 2D or 3D binary image;
     k refers to the k maximum connected components to be retained; 
@@ -53,6 +53,48 @@ def get_the_first_k_largest_components(image, k = 1): #image is binary map
         max_i_label = np.where(sizes == sizes_sorted[-1-i])[0] + 1 
         output = output + np.asarray(labeled_array == max_i_label, np.uint8)
     return  output
+
+def get_the_first_k_largest_components(image, k=1):
+    """
+    Giữ lại k thành phần liên thông lớn nhất trong ảnh nhị phân 2D hoặc 3D.
+    image: ndarray nhị phân
+    k: số thành phần lớn nhất cần giữ
+    Trả về mảng uint8 cùng shape với image, chứa các thành phần được chọn.
+    """
+    if image.sum() == 0:
+        # không có thành phần nào
+        return image.astype(np.uint8)
+
+    # chọn structuring element phù hợp
+    dim = image.ndim
+    if dim == 2:
+        structure = ndimage.generate_binary_structure(2, 1)
+    elif dim == 3:
+        structure = ndimage.generate_binary_structure(3, 1)
+    else:
+        raise ValueError("Dimension phải là 2 hoặc 3")
+
+    # đánh nhãn
+    labeled_array, num_features = ndimage.label(image, structure)
+    # tính kích thước mỗi nhãn
+    sizes = ndimage.sum(image, labeled_array, range(1, num_features + 1))
+    # sắp xếp kích thước tăng dần
+    sizes_sorted = np.sort(sizes)
+
+    # chuẩn bị output
+    output = np.zeros_like(image, dtype=np.uint8)
+
+    # lấy k nhãn lớn nhất
+    # nếu có tie (cùng size), np.where sẽ trả về mảng nhiều nhãn, và np.isin xử lý ổn
+    largest_sizes = sizes_sorted[-k:]
+    # tìm nhãn tương ứng
+    labels_to_keep = np.where(np.isin(sizes, largest_sizes))[0] + 1
+
+    # tạo mask những pixel thuộc bất kỳ nhãn nào trong labels_to_keep
+    mask = np.isin(labeled_array, labels_to_keep)
+    output[mask] = 1
+
+    return output
 
 def get_intersection_region_perclass(image1, image2):
     """get the cross region from two 2D or 3D binary image"""

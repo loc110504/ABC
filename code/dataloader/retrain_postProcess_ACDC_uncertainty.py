@@ -9,7 +9,7 @@ import h5py
 This code mainly processes the expanded train set into slices for 2d task and then write into txt"""
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_root_path', type=str,
-                    default='/mnt/data/HM/Datasets/ACDC2017/ACDC', help='Name of Experiment')
+                    default='../../data/ACDC2017/ACDC', help='Name of Experiment')
 parser.add_argument('--data_type', type=str,
                     default='Heart', help='Data category')
 parser.add_argument('--data_name', type=str,
@@ -35,28 +35,32 @@ parser.add_argument('--txtName', type=str, default="trainReT01",
 FLAGS = parser.parse_args()
 
 def deal_retrainData_to_slices_uncertainty(pred_data_path, flag, subdir = "train" ):#for retrain 2D
-    input_image_root = FLAGS.data_root_path
-    save_root_path = FLAGS.data_root_path + "_for2D"
-    save_sub_dir = save_root_path + "/" + flag
+    input_image_root = FLAGS.data_root_path # ../../data/ACDC2017/ACDC
+    save_root_path = FLAGS.data_root_path + "_for2D"  # ../../data/ACDC2017/ACDC_for2D
+    save_sub_dir = save_root_path + "/" + flag # ../../data/ACDC2017/ACDC_for2D/trainReT01_slices
     
     if not os.path.exists(save_sub_dir):
-        os.makedirs(save_sub_dir)
+        os.makedirs(save_sub_dir) # tạo trainReT01
     slice_num = 0
 
     image_path = sorted(
-        glob.glob(input_image_root + "/" + subdir + "/labels/*.nii.gz"))
+        glob.glob(input_image_root + "/" + subdir + "/labels/*.nii.gz")) # ../../data/.../train/labels/*.nii.gz
         
     for case in image_path:
+        # Lấy tên base, got _gt
         item_name = case.split("/")[-1].split(".")[0].replace("_gt","") 
         print(item_name)
 
+        # Đọc label ground truth
         label_itk = sitk.ReadImage(case) #gt
         label = sitk.GetArrayFromImage(label_itk)  
         
+        # Đọc ảnh gốc
         image_path = case.replace("labels","images_N").replace("_gt","")
         image_itk = sitk.ReadImage(image_path)
         image = sitk.GetArrayFromImage(image_itk)
 
+        # Đọc pseudo label từ stage1
         pred_un_name = case.split("/")[-1].replace("_gt", "_pred_cuM")
         pseudoLab_un_path = pred_data_path+"/"+pred_un_name
         pseudoLab_itk = sitk.ReadImage(pseudoLab_un_path)
